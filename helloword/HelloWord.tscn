@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhsxdgdk1ifqp"]
+
+[ext_resource type="Texture2D" uid="uid://bv1hmsfc07liq" path="res://icon.svg" id="2_vamuf"]
+[ext_resource type="Script" uid="uid://bx7wyks4f3rvb" path="res://script/MyNode.gd" id="3_1mrc1"]
+[ext_resource type="Script" uid="uid://c2mmr86rh013l" path="res://script/MyScript.gd" id="3_sq6yh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vamuf"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1mrc1"]
+load_path = "res://.godot/imported/gift.png-550eff1e96b072b4be4d606c15c62fff.ctex"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vamuf")
+animation = &"new_animation"
+
+[node name="Gift" type="Sprite2D" parent="."]
+position = Vector2(864, -40)
+texture = SubResource("CompressedTexture2D_1mrc1")
+region_enabled = true
+
+[node name="Icon" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(224, 144)
+texture = ExtResource("2_vamuf")
+script = ExtResource("3_sq6yh")
+
+[node name="MySprite" type="Sprite2D" parent="Icon"]
+script = ExtResource("3_sq6yh")
+metadata/_custom_type_script = "uid://c2mmr86rh013l"
+
+[node name="MyNode" type="Node2D" parent="."]
+script = ExtResource("3_1mrc1")
+b = "你好世界！"
+metadata/_custom_type_script = "uid://bx7wyks4f3rvb"

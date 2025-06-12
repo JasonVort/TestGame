@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://70y5yu5x7ijp"]
+
+[ext_resource type="Script" uid="uid://73tvf4yqpqv5" path="res://script/line_2d.gd" id="1_wtcfe"]
+[ext_resource type="Texture2D" uid="uid://bv1hmsfc07liq" path="res://icon.svg" id="2_0e48y"]
+[ext_resource type="Script" uid="uid://be8pmggv516gc" path="res://script/player.gd" id="3_epypp"]
+[ext_resource type="Script" uid="uid://dpvs3ql0r580e" path="res://script/path_follow_2d.gd" id="4_0hol4"]
+
+[sub_resource type="Curve" id="Curve_epypp"]
+_data = [Vector2(0.00531916, 0), 0.0, 0.0, 0, 0, Vector2(0.98, 1), 0.0351122, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_q6r6c"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 96, 184, 0, 0, 0, 0, 128, 296, 0, 0, 0, 0, 200, 192, 0, 0, 0, 0, 288, 248, 0, 0, 0, 0, 376, 328, 0, 0, 0, 0, 376, 424, 0, 0, 0, 0, 496, 424, 0, 0, 0, 0, 600, 392, 0, 0, 0, 0, 624, 304, 0, 0, 0, 0, 504, 104, 0, 0, 0, 0, 656, 120, 0, 0, 0, 0, 800, 136, 0, 0, 0, 0, 1024, 232, 0, 0, 0, 0, 936, 344, 0, 0, 0, 0, 768, 552, 0, 0, 0, 0, 968, 584)
+}
+point_count = 16
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 40.0
+width_curve = SubResource("Curve_epypp")
+script = ExtResource("1_wtcfe")
+
+[node name="Player" type="Sprite2D" parent="."]
+position = Vector2(104.553, 213.936)
+rotation = 1.2925
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_0e48y")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+position = Vector2(48, 40)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("3_epypp")
+
+[node name="Path2D" type="Path2D" parent="."]
+visible = false
+curve = SubResource("Curve2D_q6r6c")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+visible = false
+position = Vector2(104.553, 213.936)
+rotation = 1.2925
+progress = 31.0
+script = ExtResource("4_0hol4")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2D/PathFollow2D"]
+visible = false
+scale = Vector2(0.5, 0.5)
+remote_path = NodePath("../../../Player")
